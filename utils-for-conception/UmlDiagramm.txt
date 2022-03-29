@@ -1,0 +1,49 @@
+@startuml
+class Patient {
+    id : Integer : autoIncrement notNull
+    email : String : notNull
+    refererFirstName : String : nullable
+    refererLastName : String : nullable
+    patientFirstName : String : notNull 
+    patientLastName : String : notNull
+    token : String : notNull 
+}
+
+class Video {
+    id : Integer : autoIncrement notNull
+    title : String : notNull
+    commentary : LongText : nullable
+    file : File : notNull
+    link : String : notNull
+    published : Boolean : notNull default: false
+    falseResponseOne : String : notNull
+    falseResponseTwo : String : notNull
+    category : Relation(Category) : notNull
+}
+
+class Category {
+    id : Integer : autoIncrement notNull
+    title : String : notNull
+
+}
+
+class User {
+    id : Integer : autoIncrement notNull
+    mail : String : notNull
+    password : String : notNull
+    role : json : notNull
+}
+
+class Answer {
+    id : Integer : autoIncrement notNull
+    patient : Relation(Patient) : notNull
+    video : Relation(Video) : notNull
+    answer : String : notNull
+    date : DateTime : notNull
+    success : Boolean : notNull
+}
+
+Patient "1"^--^"many" Answer
+Video "1"^--^"many" Answer
+Video "many"^--^"many" Category
+@enduml
