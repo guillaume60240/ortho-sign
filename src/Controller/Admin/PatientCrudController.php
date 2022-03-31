@@ -67,7 +67,7 @@ class PatientCrudController extends AbstractCrudController
             })
             ->add(Crud::PAGE_INDEX, Action::DETAIL)
             ->update(Crud::PAGE_INDEX, Action::DETAIL, function (Action $action) {
-                return $action->setIcon('fa-solid fa-eye')->setLabel('Détails');
+                return $action->setIcon('fa fa-eye')->setLabel('Détails');
             })
             ->add(Crud::PAGE_INDEX, $createToken)
             ->add(Crud::PAGE_INDEX, $sendLinkToPatient)

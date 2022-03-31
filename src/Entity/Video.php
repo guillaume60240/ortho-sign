@@ -5,9 +5,16 @@ namespace App\Entity;
 use App\Repository\VideoRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation\Uploadable;
+use Vich\UploaderBundle\Mapping\Annotation\UploadableField;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @Uploadable
+ */
 #[ORM\Entity(repositoryClass: VideoRepository::class)]
+
 class Video
 {
     #[ORM\Id]
@@ -21,8 +28,8 @@ class Video
     #[ORM\Column(type: 'text', nullable: true)]
     private $commentary;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $link;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $link = null;
 
     #[ORM\Column(type: 'boolean')]
     private $published;
@@ -38,6 +45,11 @@ class Video
 
     #[ORM\OneToMany(mappedBy: 'video', targetEntity: Answer::class)]
     private $answers;
+
+    /**
+     * @UploadableField(mapping="videos", fileNameProperty="link")
+     */
+    private ?File $file = null;
 
     public function __construct()
     {
@@ -78,7 +90,7 @@ class Video
         return $this->link;
     }
 
-    public function setLink(string $link): self
+    public function setLink(?string $link): self
     {
         $this->link = $link;
 
@@ -161,5 +173,15 @@ class Video
         }
 
         return $this;
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function setFile(?File $file): void
+    {
+        $this->file = $file;
     }
 }
