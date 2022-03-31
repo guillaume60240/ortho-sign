@@ -1,0 +1,17 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var field \EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto #}
+{# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
+{% if ea.crud.currentAction == 'detail' %}
+    {% if field.value %}
+        <span>{{ field.value }}</span>
+    {% else %}
+        <span class="badge badge-danger">Non généré</span>
+    {% endif %}
+{% else  %}
+    
+    {% if field.value %}
+        <span class="badge badge-success">OK</span>
+    {% else %}
+        <span class="badge badge-danger">X</span>
+    {% endif %}
+{% endif %}

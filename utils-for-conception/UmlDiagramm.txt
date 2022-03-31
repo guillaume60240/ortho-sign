@@ -13,7 +13,6 @@ class Video {
     id : Integer : autoIncrement notNull
     title : String : notNull
     commentary : LongText : nullable
-    file : File : notNull
     link : String : notNull
     published : Boolean : notNull default: false
     falseResponseOne : String : notNull
