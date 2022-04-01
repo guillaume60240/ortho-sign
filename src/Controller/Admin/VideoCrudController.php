@@ -67,6 +67,14 @@ class VideoCrudController extends AbstractCrudController
             ->update(Crud::PAGE_DETAIL, Action::INDEX, function (Action $action) {
                 return $action->setIcon('fa fa-home')->setLabel('Retour');
             })
+            ->add(Crud::PAGE_EDIT, Action::INDEX)
+            ->update(Crud::PAGE_EDIT, Action::INDEX, function (Action $action) {
+                return $action->setIcon('fa fa-list')->setLabel('Retour à la liste');
+            })
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action->setIcon('fa fa-check')->setLabel('Valider');
+            })
+            ->remove(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE)
             ->reorder(Crud::PAGE_DETAIL, [Action::INDEX, Action::DELETE, Action::EDIT])
 
             ;
