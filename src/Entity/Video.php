@@ -87,7 +87,7 @@ class Video
 
     public function getLink(): ?string
     {
-        return $this->link;
+        return $_ENV['AWS_S3_PATH_PREFIX'].$this->link;
     }
 
     public function setLink(?string $link): self
